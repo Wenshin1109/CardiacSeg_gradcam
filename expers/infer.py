@@ -1,6 +1,6 @@
 import sys
 # set package path
-sys.path.append("/nfs/Workspace/CardiacSeg")
+sys.path.append("/content/CardiacSeg_gradcam")
 
 import os
 from functools import partial
@@ -19,6 +19,7 @@ from data_utils.data_loader_utils import load_data_dict_json
 from data_utils.dataset import get_infer_data
 from data_utils.io import load_json
 from runners.inferer import run_infering
+from runners.inferer import run_infering_with_gradcam
 from networks.network import network
 
 from expers.args import get_parser
@@ -88,8 +89,10 @@ def main_worker(args):
         roi_size=[args.roi_x, args.roi_y, args.roi_z],
         sw_batch_size=args.sw_batch_size,
         predictor=model,
-        overlap=args.infer_overlap,
+        overlap=args.infer_overlap
+        # overlap = 0.5
     )
+    print(args.infer_overlap)
 
     # prepare data_dict
     if args.data_dicts_json and args.data_name != 'mmwhs':
@@ -123,8 +126,12 @@ def main_worker(args):
     #         args
     #     )
 
+    # 印出模型結構
+    # print(model)
+
+
     # run infer with grad-cam
-    target_layers = [model.encoder[-1].conv]
+    target_layers = [model.model[1].submodule[1].submodule[0].conv]
     for data_dict in data_dicts:
         print('infer data:', data_dict)
       

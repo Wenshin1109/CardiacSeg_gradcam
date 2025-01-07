@@ -207,7 +207,7 @@ def run_infering_with_gradcam(
     device = args.device
 
     # 初始化 grad-cam
-    cam = GradCAM(model=model, target_layers=target_layers, use_cuda=torch.cuda.is_available())
+    cam = GradCAM(model=model, target_layers=target_layers)
 
     input_tensor = data['image'].to(device)
     grayscale_cam = cam(input_tensor=input_tensor, targets=None)
