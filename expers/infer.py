@@ -107,7 +107,24 @@ def main_worker(args):
                 'image': args.img_pth,
             }]
 
-    # run infer
+    # # run infer
+    # for data_dict in data_dicts:
+    #     print('infer data:', data_dict)
+      
+    #     # load infer data
+    #     data = get_infer_data(data_dict, args)
+
+    #     # infer
+    #     run_infering(
+    #         model,
+    #         data,
+    #         model_inferer,
+    #         post_transform,
+    #         args
+    #     )
+
+    # run infer with grad-cam
+    target_layers = [model.encoder[-1].conv]
     for data_dict in data_dicts:
         print('infer data:', data_dict)
       
@@ -115,12 +132,13 @@ def main_worker(args):
         data = get_infer_data(data_dict, args)
 
         # infer
-        run_infering(
+        run_infering_with_gradcam(
             model,
             data,
             model_inferer,
             post_transform,
-            args
+            args,
+            target_layers
         )
 
 
