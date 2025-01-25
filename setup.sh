@@ -1,9 +1,10 @@
 sudo apt update && \
 sudo apt install ffmpeg libsm6 libxext6  -y && \
-pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113 && \
-# pip install torch==2.0.1+cu118 torchvision==0.15.2+cu118 torchaudio==2.0.2 --extra-index-url https://download.pytorch.org/whl/cu118 && \
+# pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu113 && \
+pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121 && \
 pip install "monai[nibabel, tqdm, einops]==1.2.0" && \
-pip install monailabel==0.7.0 && \
+# pip install monailabel==0.7.0 && \
+pip install monailabel==0.8.5 && \
 pip install timm==0.6.13 && \
 pip install tensorboard==2.13.0 && \
 pip install ml-collections==0.1.1 && \
